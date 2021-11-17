@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://FlappyBirdAssets/background-day.png" type="Texture" id=1]
+[ext_resource path="res://FlappyBirdAssets/base.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "BackgroundScrolling"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BackgroundImage:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3, 3.001 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -220, 0 ), Vector2( -220, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("FloorImage:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -220, 0 ) ]
+}
+
+[node name="Background" type="ParallaxBackground"]
+
+[node name="BackgroundImage" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 220, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="BackgroundImage"]
+margin_right = 220.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 220, 400 )
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FloorImage" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 220, 0 )
+
+[node name="TextureRect" type="TextureRect" parent="FloorImage"]
+margin_top = 320.0
+margin_right = 220.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 220, 80 )
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "BackgroundScrolling"
+anims/BackgroundScrolling = SubResource( 1 )
